@@ -53,6 +53,7 @@ flowchart TB
 ```
 #### ELK Installation
 Step 1 Install java
+
 Java handles things like memory management, indexing performance, and query execution.
 
 ```
