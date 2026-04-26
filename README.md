@@ -273,7 +273,9 @@ Select the server OS  and copy the commands that will be generated paste them to
 
 On the intended server, execute the commands in the order they are presented in the policy 
 
-![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e31.png)
+When all the commands have been executed, the agent will be installed . Repeat the procedure for other devive that you need and agent installed
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e38.png)
 
 
 
