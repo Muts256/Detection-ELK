@@ -75,7 +75,7 @@ Java handles things like memory management, indexing performance, and query exec
 sudo apt install openjdk-17-jdk -y
 
 ```
-![image alt](e3)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e3.png)
 
 Step 3: 
 
@@ -105,7 +105,7 @@ sudo apt update
 sudo apt install -y elasticsearch
 ```
 
-![image alt](e8)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e8.png)
 
 Enable and verify that Elasticsearch is running. "enable elasticsearch" ensures the service runs if and when the server is rebooted
 ```
@@ -117,7 +117,7 @@ Purpose:
 
 *Elasticsearch → stores and indexes logs for fast searching.*
 
-![image alt](e11)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e11.png)
 
 Step 5: Install, enable, start and verify Logstash is running
 
@@ -134,7 +134,7 @@ Purpose:
 
 *Logstash → processes and forwards logs into Elasticsearch.*
 
-![image alt](e13)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e13.png)
 
 Step 6: Repeat step 5 for Kibana
 
@@ -151,7 +151,7 @@ Purpose:
 
 *Kibana → allows inspection of logs and investigation of events (e.g. failed SSH logins)*
 
-![image alt](e15)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e15.png)
 
 
 #### ELK Configuration
@@ -216,7 +216,7 @@ cd /usr/share/elasticsearch/bin
 ./elasticsearch-create-enrollment-token
 
 ```
-![image alt](e25)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e25.png)
 
 
 The Kibana verification code is a one-time code used during initial setup to confirm Kibana is running and securely connected to Elasticsearch.
@@ -225,16 +225,16 @@ cd /usr/share/kibana/bin
 ./kibana-verfication-code
 ```
 
-![image alt](e25a)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e25a.png)
 
 Enter the verification code
 
-![image alt](e26)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e26.png)
 
 
 When the login page is displayed, enter the username and password generated in step 
 
-![image alt](e27)
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e27.png)
 
 Step 13 
 Add a fleet server
