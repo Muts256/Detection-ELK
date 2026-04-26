@@ -222,7 +222,6 @@ The Kibana verification code is a one-time code used during initial setup to con
 ```
 cd /usr/share/kibana/bin
 ./kibana-verfication-code
-
 ```
 
 
