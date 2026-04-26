@@ -1,7 +1,7 @@
 ### Detection-ELK
 
 #### Introduction
-The ELK stack—Elasticsearch, Logstash, and Kibana—is a widely used solution for collecting, processing, and analyzing log data in real time. It enables security teams to centralize logs from multiple systems and quickly identify suspicious activity.
+The ELK stack, Elasticsearch, Logstash, and Kibana, is a widely used solution for collecting, processing, and analyzing log data in real time. It enables security teams to centralize logs from multiple systems and quickly identify suspicious activity.
 
 In this project, simulated SSH brute-force attacks are launched from an attacker machine against both Linux and Windows targets. The resulting logs are collected and processed through the ELK stack, allowing detection of unauthorized access attempts.
 
@@ -190,9 +190,40 @@ Step 9: Add the keys to the keystore
 .kibana-keystore add xpack.encryptedSavedObjects. encryptionKey
 
 ```
+Step 10: Allow port 9200 and port 5601 through the firewall 
+
+```
+ufw allow 9200/tcp
+
+ufw allow 5601/tcp
+```
+
+Step 11: Reset Kibana and Elastic passwords
+
+```
+/usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana_system
+
+/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+```
 
 
+Step 12: Generating Enrollment Token and Verification Code.
 
+Generate a temporary enrollment token used to securely connect Kibana or additional nodes to an Elasticsearch cluster during initial setup.
+
+```
+cd /usr/share/elasticsearch/bin
+./elasticsearch-create-enrollment-token
+
+```
+![image alt](e25)
+
+The Kibana verification code is a one-time code used during initial setup to confirm Kibana is running and securely connected to Elasticsearch.
+```
+cd /usr/share/kibana/bin
+./kibana-verfication-code
+
+```
 
 
 
