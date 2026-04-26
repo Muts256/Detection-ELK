@@ -34,6 +34,7 @@ flowchart TB
         end
 
         subgraph E["ELK Stack (Ubuntu 24.04)"]
+            FS[Fleet Server]
             L[Logstash]
             ES[Elasticsearch]
             K[Kibana]
@@ -44,12 +45,20 @@ flowchart TB
     A1 -->|Brute Force SSH| T1
     A1 -->|Login Attempts| T2
 
+    %% Endpoint telemetry goes via Fleet Server (modern path)
+    T1 -->|Logs via Elastic Agent| FS
+    T2 -->|Logs via Elastic Agent| FS
+
+    %% Optional legacy ingestion path (if used in your lab)
     T1 -->|/var/log/auth.log| L
     T2 -->|Windows Event Logs| L
 
+    %% Processing pipeline
+    FS --> ES
     L --> ES
-    ES --> K
 
+    %% Visualization
+    ES --> K
 ```
 #### ELK Installation
 Log in to the EC2 instance using the SSH keys created in the deployment stage
