@@ -218,18 +218,25 @@ cd /usr/share/elasticsearch/bin
 ```
 ![image alt](e25)
 
+
 The Kibana verification code is a one-time code used during initial setup to confirm Kibana is running and securely connected to Elasticsearch.
 ```
 cd /usr/share/kibana/bin
 ./kibana-verfication-code
 ```
 
+![image alt](e25a)
+
+Enter the verification code
+
+![image alt](e26)
 
 
+When the login page is displayed, enter the username and password generated in step 
 
+![image alt](e27)
 
-
-
-
+Step 13 
+Add a fleet server
 
 
