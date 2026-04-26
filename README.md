@@ -52,9 +52,20 @@ flowchart TB
 
 ```
 #### ELK Installation
+Log in to the EC2 instance using the SSH keys created in the deployment stage
+use the command:
 
-Step 1: Update System
+```
+ssh -i <name given to the EC2 instance> ubuntu@<public IP address of instance>
+```
 
+Step 1: Update & Upgrade Packages
+
+Update the package index and upgrade installed packages
+
+```
+sudo apt update && sudo apt upgrade -y
+```
 
 Step 2: Install Java
 
@@ -64,6 +75,7 @@ Java handles things like memory management, indexing performance, and query exec
 sudo apt install openjdk-17-jdk -y
 
 ```
+
 
 ![image alt]()
 
