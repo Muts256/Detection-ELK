@@ -12,9 +12,9 @@ This project addresses the challenge of detecting SSH brute-force attacks and ab
 #### Tools used
 - *AWS EC2*
   - Elasticsearch, Log Stach, Kibana - ELK on Ubuntu 24.04 
-  - Ubuntu 24.04 Client
-  - Window 2022
-  - Ubuntu 24.04 attacker
+  - Ubuntu 24.04 (Client)
+  - Window 2022 (Client)
+  - Ubuntu 24.04 (Attacker)
     
 #### Architecture
 
