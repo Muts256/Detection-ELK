@@ -18,7 +18,7 @@ This project addresses the challenge of detecting SSH brute-force attacks and ab
     
 #### Architecture
 
-*A simulation of an SSH/ RDP brute-force attacks against Linux and Windows systems, with logs ingested and analyzed using the ELK stack for detection and visualization.*
+*A simulation of an SSH/ RDP brute-force attack against Linux and Windows systems, with logs ingested and analyzed using the ELK stack for detection and visualization.*
 
 ```mermaid
 flowchart TB
@@ -53,10 +53,10 @@ flowchart TB
 ```
 #### ELK Installation
 Log in to the EC2 instance using the SSH keys created in the deployment stage
-use the command:
+Use the command:
 
 ```
-ssh -i <name given to the EC2 instance> ubuntu@<public IP address of instance>
+ssh -i <name of SSH key.pem> ubuntu@<public IP address of instance>
 ```
 
 Step 1: Update & Upgrade Packages
@@ -75,8 +75,121 @@ Java handles things like memory management, indexing performance, and query exec
 sudo apt install openjdk-17-jdk -y
 
 ```
+![image alt](e3)
+
+Step 3: 
+
+Import the Elastic GPG signing key: for trust and package verification
+
+```
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+```
+
+  - curl -fsSL ... → downloads Elastic’s GPG public signing key
+  - gpg --dearmor → converts it into a binary format that APT understands
+  - -o /usr/share/keyrings/... → stores the key in a trusted keyring location on your system
+
+Add the Elastic 8.x APT repository on the system
+
+```
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+```
+  - echo "deb ..." → defines a new APT repository (Elastic’s official package source)
+  - signed-by=... → tells APT to only trust packages signed with the GPG key added earlier
+  - tee /etc/apt/sources.list.d/... → writes this repo into a new sources list file (with sudo permissions)
+
+Step 4: Update the repository and install Elasticsearch
+
+```
+sudo apt update
+sudo apt install -y elasticsearch
+```
+
+![image alt](e8)
+
+Enable and verify that Elasticsearch is running. "enable elasticsearch" ensures the service runs if and when the server is rebooted
+```
+sudo systemctl enable elasticsearch.service
+
+sudo systemctl status elasticsearch
+```
+Purpose:
+
+*Elasticsearch → stores and indexes logs for fast searching.*
+
+![image alt](e11)
+
+Step 5: Install, enable, start and verify Logstash is running
+
+```
+sudo apt install logstash -y
+
+sudo systemctl enable logstash
+
+sudo systemctl start logstash
+
+sudo systemctl status logstash 
+```
+Purpose:
+
+*Logstash → processes and forwards logs into Elasticsearch.*
+
+![image alt](e13)
+
+Step 6: Repeat step 5 for Kibana
+
+```
+sudo apt install kibana -y
+
+sudo systemctl enable kibana
+
+sudo systemctl start kibana
+
+sudo systemctl status kibana 
+```
+Purpose:
+
+*Kibana → allows inspection of logs and investigation of events (e.g. failed SSH logins)*
+
+![image alt](e15)
 
 
-![image alt]()
+#### ELK Configuration
+
+Step 7: Configure Elasticsearch
+Edit the file elasticsearch.yml to listen to all network interfaces.
+Restart the Elasticsearch service for the changes to take effect
+
+```
+vi elasticsearch.yml: use IP address 0.0.0.0
+
+sudo systemctl restart elasticsearch
+
+sudo systemctl status elasticsearch
+```
+Note: Using the IP address 0.0.0.0 should not be used in a production environment. Restrict the IP address to private only.
+
+Step 8: Generate Encryption Keys.
+Navigate to /usr/share/kibana/bin
+```
+cd /usr/share/kibana/bin
+./kibana-encryption-keys generate
+```
+Step 9: Add the keys to the keystore
+
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
