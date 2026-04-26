@@ -11,7 +11,8 @@ This project addresses the challenge of detecting SSH brute-force attacks and ab
 
 #### Tools used
 - *AWS EC2*
-  - Elasticsearch, Log Stach, Kibana - ELK on Ubuntu 24.04 
+  - Elasticsearch, Log Stach, Kibana - ELK on Ubuntu 24.04
+  - Fleet Server (Ubuntu 20.04)
   - Ubuntu 24.04 (Client)
   - Window 2022 (Client)
   - Ubuntu 24.04 (Attacker)
@@ -199,7 +200,9 @@ Step 9: Add the keys to the keystore
 .kibana-keystore add xpack.encryptedSavedObjects. encryptionKey
 
 ```
-Step 10: Allow port 9200 and port 5601 through the firewall 
+Restart Kibana for the changes to be committed
+
+Step 10: Allow elasticsearch on port 9200 and kibana on port 5601 through the firewall 
 
 ```
 ufw allow 9200/tcp
@@ -215,8 +218,13 @@ Step 11: Reset Kibana and Elastic passwords
 /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
 ```
 
-
+In a web browser, enter the IP address of the server and port 9200 to test whether the server is accessible, i.e. 
+```
+https://<your-elk-server-public-ip>:9200
+```
 Step 12: Generating Enrollment Token and Verification Code.
+
+In another web browser tab, access Kibana via port 5601. Before access can be granted, an enrollment token is required
 
 Generate a temporary enrollment token used to securely connect Kibana or additional nodes to an Elasticsearch cluster during initial setup.
 
@@ -227,6 +235,7 @@ cd /usr/share/elasticsearch/bin
 ```
 ![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e25.png)
 
+Copy the enrollment token and paste it in the space provided in the web browser.
 
 The Kibana verification code is a one-time code used during initial setup to confirm Kibana is running and securely connected to Elasticsearch.
 ```
@@ -245,7 +254,30 @@ When the login page is displayed, enter the username and password generated in s
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e27.png)
 
+Use the username and password of the elastic user generated in step 11
+
 Step 13 
-Add a fleet server
+Add a fleet server to manage multiple agents
+
+Under management, select fleet, then click on Add a Fleet Server
+
+Fill in the name of the fleet server and the URL in this case, and create fleet policy
+```
+https://<fleet server public address>:8220
+```
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e29.png)
+
+Select the server OS  and copy the commands that will be generated paste them to the intended server
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e30.png)
+
+On the intended server, execute the commands in the order they are presented in the policy 
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e31.png)
+
+
+
+
+
 
 
