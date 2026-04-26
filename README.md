@@ -170,14 +170,24 @@ sudo systemctl status elasticsearch
 Note: Using the IP address 0.0.0.0 should not be used in a production environment. Restrict the IP address to private only.
 
 Step 8: Generate Encryption Keys.
+
+3 keys will be generated. This command generates encryption keys used by Kibana to protect authentication data, saved objects, and reporting data at rest.
+
 Navigate to /usr/share/kibana/bin
 ```
 cd /usr/share/kibana/bin
 ./kibana-encryption-keys generate
 ```
+
+
 Step 9: Add the keys to the keystore
 
 ```
+.kibana-keystore add xpack.security.encryptionKey
+
+.kibana-keystore add xpack.reporting.encryptionKey
+
+.kibana-keystore add xpack.encryptedSavedObjects. encryptionKey
 
 ```
 
