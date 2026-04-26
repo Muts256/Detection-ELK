@@ -1,4 +1,4 @@
-### Detection-ELK
+### SSH Detection-ELK
 
 #### Introduction
 The ELK stack, Elasticsearch, Logstash, and Kibana, is a widely used solution for collecting, processing, and analyzing log data in real time. It enables security teams to centralize logs from multiple systems and quickly identify suspicious activity.
